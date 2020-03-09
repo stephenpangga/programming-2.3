@@ -62,6 +62,9 @@ namespace Program02
             //Letter Storage
             List<char> enteredLetters = new List<char>();
             DisplayWord(hangman.guessedWord);
+            DisplayLetters(enteredLetters);
+
+            ReadLetter(enteredLetters);
             //word guessed?
             return true;
         }
@@ -77,5 +80,30 @@ namespace Program02
             Console.WriteLine($"The Secret word is: {secret}");
         }
 
+        void DisplayLetters(List<char> letters)
+        {
+            foreach(char c in letters)
+            {
+                Console.Write(c + " ");
+            }
+        }
+
+        char ReadLetter(List<char> blacklistLetters)
+        {
+            Console.Write("Enter a letter: ");
+            //string letter = Console.ReadLine();
+            char letter = char.Parse(Console.ReadLine());
+            while (blacklistLetters.Contains(letter))
+            {
+
+                Console.Write("Enter a letter: ");
+                letter = char.Parse(Console.ReadLine());
+
+            }
+            blacklistLetters.Add(letter);
+            return letter;
+        }
+
+       
     }
 }
