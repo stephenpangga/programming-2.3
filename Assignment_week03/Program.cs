@@ -15,9 +15,65 @@ namespace Program01
         }
         void Start()
         {
-            Course course = ReadCourse("Enter a course.");
+            //Course course = ReadCourse("Enter a course.");
             //DisplayPracticalGrade();
-            DisplayCourse(course);
+            //DisplayCourse(course);
+
+            //part c
+            List<Course>report;
+            report = ReadReport();
+            Console.WriteLine();//for spacing
+            DisplayReport(report);
+        }
+        List<Course> ReadReport()
+        {
+            List<Course> r = new List<Course>();
+            for(int i = 0; i <=2; i++)
+            {
+                Course c = new Course();
+                c = ReadCourse("Enter a Course: ");
+                r.Add(c); //add the course to the list of report+
+                Console.WriteLine();//spacing between course input
+            }
+            return r;
+
+        }
+
+        void DisplayReport(List<Course> report)
+        {
+            int passed = 0;
+            int CumLaude = 0;
+            int retake = 0;
+            for (int i =0; i<=2; i++)
+            {
+                DisplayCourse(report[i]);
+                if (report[i].Passed())
+                {
+                    passed++;
+                }
+                else
+                {
+                    //to count for the retakes.
+                    retake++;
+                }
+
+                if (report[i].CumLaude())
+                {
+                    CumLaude++;
+                }
+            }
+            if (passed < 3)
+            {
+                Console.WriteLine($"Too bad!! You failed, you got {retake} retakes.");
+            }
+            else if (CumLaude > 0)
+            {
+                Console.WriteLine("Congratulation you passed with a Cum Luade reults");
+            }
+            else
+            {
+                Console.WriteLine("Congratulation!! you passed");
+            }
         }
 
         PracticalGrade ReadPracticalGrade(string question)
@@ -29,7 +85,7 @@ namespace Program01
         
         void DisplayPracticalGrade(PracticalGrade Practical)
         {
-
+            Console.WriteLine(Practical);
         }
 
         Course ReadCourse(string question)
